@@ -28,6 +28,14 @@ public class MonsterTest {
   }
 
   @Test
+  public void elementMonster() {
+    Monster monster = new Monster(1, 2);
+    monster.elementMonster();
+    String expected = "水・スライム";
+    assertEquals(expected, monster.getName());
+  }
+
+  @Test
   public void getName() {
     Monster monster = new Monster(1, 1);
     String expected = "スライム";
