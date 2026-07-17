@@ -6,9 +6,8 @@ public class SeMonsterGame {
     //playerインスタンスを保持するためのリスト
     private static List<Player> playerList = new ArrayList<>();
 
-    public void addPlayer(String playerName) {
-        Player player = new Player();
-        player.name = playerName;
+    public void addPlayer(String playerName, int hp) {
+        Player player = new Player(playerName, hp);
         playerList.add(player);
     }
 
