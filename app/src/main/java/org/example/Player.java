@@ -4,43 +4,36 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Player {
-  String name; // Player name
-  int hp;      // プレイヤーのHPを追加
+  String name;
+  int deckSize = 8;
+  int hp;
+  ArrayList<Monster> deck = new ArrayList<>();
+  LinkedList<Monster> link = new LinkedList<>();
 
-  ArrayList<Monster> monsterDeck = new ArrayList<>();
-  LinkedList<Integer> randomNumberList;
-
-  // コンストラクタでHPも受け取る
-  Player(LinkedList<Integer> randomNumberList, String playerName, int hp) {
-    this.randomNumberList = randomNumberList;
-    this.name = playerName;
+  public Player(String name,int hp) {
+    this.name = name;
     this.hp = hp;
-  }
 
-  /**
-   * モンスターを5体分drawする
-   */
-  public void drawMonsters() {
-    for (int i = 0; i < 5; i++) {
-      this.monsterDeck.add(new Monster(this.randomNumberList.pop(),
-                                       this.randomNumberList.pop()));
+    for (int i = 0; i < deckSize; i++) {
+      int monsterId = (int) (Math.random() * 5);
+      int rarity = (int) (Math.random() * 5);
+      Monster monster = new Monster(monsterId, rarity);
+
+      deck.add(monster);
+      link.add(monster);
     }
+
   }
 
-  @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
+    String message = "";
 
-    // HPを表示するように変更
-    sb.append("Player:").append(this.name)
-      .append(" HP:").append(this.hp).append("\n");
-
-    sb.append("Deck:\n");
-
-    for (Monster m : this.monsterDeck) {
-      sb.append(m).append("\n");
+    message += "Deck:" + this.name + "\n";
+    message += "HP:" + this.hp + "\n";
+    for (Monster monster : deck) {
+      message += monster + "\n";
     }
 
-    return sb.toString();
+    return message;
   }
 }
